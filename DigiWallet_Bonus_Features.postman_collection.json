@@ -1,0 +1,417 @@
+{
+	"info": {
+		"_postman_id": "9a7e6d8f-8c9b-4d5e-a3f2-1b0c7d8e9a6c",
+		"name": "DigiWallet Bonus Features",
+		"description": "API collection for the DigiWallet bonus features",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"adminpassword\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login as admin to get JWT token"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Soft Delete",
+			"item": [
+				{
+					"name": "Get Soft Deleted Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/admin/users/deleted?page=1&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin",
+								"users",
+								"deleted"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get all soft deleted users (admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Soft Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/admin/users/:userId/soft",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin",
+								"users",
+								":userId",
+								"soft"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "REPLACE_WITH_USER_ID",
+									"description": "MongoDB ID of the user to soft delete"
+								}
+							]
+						},
+						"description": "Soft delete a user (admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Restore Soft Deleted User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/admin/users/:userId/restore",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin",
+								"users",
+								":userId",
+								"restore"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "REPLACE_WITH_USER_ID",
+									"description": "MongoDB ID of the user to restore"
+								}
+							]
+						},
+						"description": "Restore a soft deleted user (admin only)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction Soft Delete",
+			"item": [
+				{
+					"name": "Get Soft Deleted Transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/admin/transactions/deleted?page=1&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin",
+								"transactions",
+								"deleted"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get all soft deleted transactions (admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Soft Delete Transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/admin/transactions/:transactionId/soft",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin",
+								"transactions",
+								":transactionId",
+								"soft"
+							],
+							"variable": [
+								{
+									"key": "transactionId",
+									"value": "REPLACE_WITH_TRANSACTION_ID",
+									"description": "MongoDB ID of the transaction to soft delete"
+								}
+							]
+						},
+						"description": "Soft delete a transaction (admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Restore Soft Deleted Transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/admin/transactions/:transactionId/restore",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin",
+								"transactions",
+								":transactionId",
+								"restore"
+							],
+							"variable": [
+								{
+									"key": "transactionId",
+									"value": "REPLACE_WITH_TRANSACTION_ID",
+									"description": "MongoDB ID of the transaction to restore"
+								}
+							]
+						},
+						"description": "Restore a soft deleted transaction (admin only)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fraud Detection",
+			"item": [
+				{
+					"name": "Run Fraud Scan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/admin/fraud-scan/run",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin",
+								"fraud-scan",
+								"run"
+							]
+						},
+						"description": "Manually run a fraud scan (admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Large Transaction (Email Alert)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 10000,\n    \"currency\": \"USD\",\n    \"description\": \"Large deposit to test email alerts\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/wallet/deposit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"wallet",
+								"deposit"
+							]
+						},
+						"description": "Make a large deposit to trigger email alert"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "admin_token",
+			"value": "REPLACE_WITH_ADMIN_JWT_TOKEN",
+			"type": "string"
+		},
+		{
+			"key": "user_token",
+			"value": "REPLACE_WITH_USER_JWT_TOKEN",
+			"type": "string"
+		}
+	]
+}
