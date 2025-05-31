@@ -63,7 +63,7 @@ A comprehensive digital wallet system with cash management and fraud detection c
 
 1. Clone the repository
    ```
-   git clone https://github.com/yourusername/digiwallet.git
+   git clone https://github.com/arushree16/digiwallet
    cd digiwallet
    ```
 
