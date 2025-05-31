@@ -52,6 +52,23 @@ A comprehensive digital wallet system with cash management and fraud detection c
 - **Authentication**: JWT (JSON Web Tokens)
 - **Security**: bcrypt for password hashing, Helmet for HTTP security
 
+## Demo Video
+
+A comprehensive demo of the DigiWallet API functionality is available. The video demonstrates all core and bonus features including authentication, wallet operations, transaction processing, and fraud detection.
+
+### How to Add the Demo Video
+
+For the best GitHub presentation, I recommend:
+
+1. Upload your `Digiwallet_arushree.mov` to YouTube
+2. Replace the placeholder below with your YouTube video ID
+
+```markdown
+[![DigiWallet Demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+```
+
+This will create a clickable thumbnail in your README that opens the YouTube video.
+
 ## Getting Started
 
 ### Prerequisites
