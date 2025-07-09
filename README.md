@@ -65,6 +65,13 @@ https://drive.google.com/file/d/1JTinbouwaOgXyFg-WjOpBJl20Ezef-LS/view?usp=shari
 - **Authentication**: JWT (JSON Web Tokens) and Firebase Authentication
 - **Security**: bcrypt for password hashing, Helmet for HTTP security
 
+## Security Notice
+
+:warning: **Never commit your Firebase service account JSON or other secret key files to version control!**
+
+- The `.gitignore` is configured to prevent this, but always double-check before pushing code.
+- Use `.env.example` to document required environment variables (never secrets).
+
 ## Firebase Authentication
 
 DigiWallet now supports Firebase Authentication for secure and scalable user login. Users can sign in using Google, email/password, and other providers via Firebase. The backend verifies Firebase ID tokens and associates them with wallet accounts.
@@ -157,6 +164,20 @@ To use these collections:
 3. Use the Login endpoint to get a token and set it as the `admin_token` variable
 
 ## API Documentation
+
+### Authenticating with Firebase
+
+- You can authenticate API requests using either:
+  - A JWT token (from DigiWallet's login endpoint)
+  - A Firebase ID token (from Firebase Authentication)
+- To use a Firebase ID token:
+  1. Obtain the token by signing in a user with Firebase Auth (see README instructions above).
+  2. Send the token in the `Authorization` header:
+     
+     ```
+     Authorization: Bearer <FIREBASE_ID_TOKEN>
+     ```
+  3. Protected endpoints will accept either JWT or Firebase tokens.
 
 ### Authentication Endpoints
 
