@@ -20,6 +20,7 @@ const database_1 = __importDefault(require("./config/database"));
 const config_1 = __importDefault(require("./config/config"));
 const swagger_1 = require("./utils/swagger");
 const scheduler_service_1 = require("./services/scheduler.service");
+const firebaseAuth = require('./middlewares/firebaseAuth');
 // Import routes
 const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
 const wallet_routes_1 = __importDefault(require("./routes/wallet.routes"));
@@ -106,6 +107,12 @@ app.get('/', (req, res) => {
         message: 'Welcome to DigiWallet API',
         documentation: '/api/docs',
     });
+});
+app.get('/api/firebase-test', firebaseAuth, (req, res) => {
+  res.json({
+    message: 'Firebase authentication successful!',
+    firebaseUser: req.firebaseUser
+  });
 });
 // Error handling middleware
 app.use((err, req, res, next) => {

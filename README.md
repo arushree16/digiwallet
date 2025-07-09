@@ -10,22 +10,27 @@ https://drive.google.com/file/d/1JTinbouwaOgXyFg-WjOpBJl20Ezef-LS/view?usp=shari
 ## Features
 
 ### Core Features
+
 1. **User Authentication & Session Management**
+
    - User registration and login with secure password hashing (bcrypt)
    - JWT token authentication
    - Protected endpoints with authentication middleware
 
 2. **Wallet Operations**
+
    - Deposit and withdraw virtual cash
    - Transfer funds between users
    - Transaction history tracking
    - Multi-currency support
 
 3. **Transaction Processing & Validation**
+
    - Atomic transactions (secure deduction and credit of funds)
    - Validations to prevent overdrafts, negative deposits, or invalid transfers
 
 4. **Fraud Detection Logic**
+
    - Detection of suspicious patterns:
      - Multiple transfers in a short period
      - Sudden large withdrawals
@@ -37,12 +42,15 @@ https://drive.google.com/file/d/1JTinbouwaOgXyFg-WjOpBJl20Ezef-LS/view?usp=shari
    - View top users by balance or transaction volume
 
 ### Bonus Features
+
 1. **Soft Delete Functionality**
+
    - Soft delete users and transactions instead of permanently removing them
    - Restore soft-deleted users and transactions
    - View all soft-deleted users and transactions (admin only)
 
 2. **Scheduled Jobs**
+
    - Daily fraud scan scheduled using node-cron
    - Automated detection of suspicious patterns
 
@@ -52,10 +60,14 @@ https://drive.google.com/file/d/1JTinbouwaOgXyFg-WjOpBJl20Ezef-LS/view?usp=shari
 
 ## Tech Stack
 
-- **Backend**: Node.js, Express, TypeScript
+- **Backend**: Node.js, Express (JavaScript, no TypeScript)
 - **Database**: MongoDB with Mongoose
-- **Authentication**: JWT (JSON Web Tokens)
+- **Authentication**: JWT (JSON Web Tokens) and Firebase Authentication
 - **Security**: bcrypt for password hashing, Helmet for HTTP security
+
+## Firebase Authentication
+
+DigiWallet now supports Firebase Authentication for secure and scalable user login. Users can sign in using Google, email/password, and other providers via Firebase. The backend verifies Firebase ID tokens and associates them with wallet accounts.
 
 ## Getting Started
 
@@ -67,18 +79,22 @@ https://drive.google.com/file/d/1JTinbouwaOgXyFg-WjOpBJl20Ezef-LS/view?usp=shari
 ### Installation
 
 1. Clone the repository
+
    ```
    git clone https://github.com/arushree16/digiwallet
    cd digiwallet
    ```
 
 2. Install dependencies
+
    ```
    npm install
    ```
 
 3. Set up environment variables
+
    - Create a `.env` file in the root directory based on `.env.example`
+
    ```
    PORT=5000
    MONGODB_URI=mongodb://localhost:27017/digiwallet
@@ -88,32 +104,19 @@ https://drive.google.com/file/d/1JTinbouwaOgXyFg-WjOpBJl20Ezef-LS/view?usp=shari
 
 4. Run the project
 
-   The TypeScript errors have been fixed, so you can now build and run the project normally:
-   ```
-   # Build the project
-   npm run build
-   
-   # Start the server
-   npm start
+   To run the backend server, use:
+
+   ```bash
+   cd dist
+   node server.js
    ```
 
-   For development with hot reloading:
-   ```
-   npm run dev
-   ```
-
-## TypeScript Implementation Notes
-
-This project has been fully implemented in TypeScript with proper type definitions. Recent updates include:
-
-- Fixed TypeScript compilation errors while maintaining full functionality
-- Improved type definitions for Express middleware functions
-- Enhanced tsconfig.json settings for better developer experience
-- Ensured all routes and controllers are properly typed
+   For development, edit the `.js` files in the `dist/` directory directly. If you want type safety in the future, consider migrating to a TypeScript setup.
 
 ## Bonus Features Implementation
 
 ### Soft Delete Functionality
+
 The system implements a soft delete pattern instead of permanently removing data:
 
 - Added `isDeleted` and `deletedAt` fields to User and Transaction models
@@ -121,6 +124,7 @@ The system implements a soft delete pattern instead of permanently removing data
 - Implemented filters to exclude soft-deleted items from regular queries
 
 ### Scheduled Jobs for Fraud Detection
+
 Automated fraud detection runs on a schedule:
 
 - Implemented using `node-cron` to run daily scans
@@ -128,6 +132,7 @@ Automated fraud detection runs on a schedule:
 - Logs all detected fraud cases for admin review
 
 ### Email Alerts for Large Transactions
+
 The system sends alerts for potentially suspicious activity:
 
 - Email notifications for transactions over $10,000
@@ -145,6 +150,7 @@ The project includes two Postman collections for testing the API:
    - Fraud detection and email alerts
 
 To use these collections:
+
 1. Import them into Postman
 2. Create an environment with the following variables:
    - `admin_token`: JWT token for an admin user
@@ -155,6 +161,7 @@ To use these collections:
 ### Authentication Endpoints
 
 - **Register User**: `POST /api/auth/register`
+
   ```json
   {
     "username": "johndoe",
@@ -164,6 +171,7 @@ To use these collections:
   ```
 
 - **Login User**: `POST /api/auth/login`
+
   ```json
   {
     "email": "john@example.com",
@@ -177,6 +185,7 @@ To use these collections:
 ### Wallet Endpoints
 
 - **Deposit Funds**: `POST /api/wallet/deposit`
+
   ```json
   {
     "amount": 100,
@@ -185,6 +194,7 @@ To use these collections:
   ```
 
 - **Withdraw Funds**: `POST /api/wallet/withdraw`
+
   ```json
   {
     "amount": 50,
@@ -193,6 +203,7 @@ To use these collections:
   ```
 
 - **Transfer Funds**: `POST /api/wallet/transfer`
+
   ```json
   {
     "recipientId": "user_id_here",
@@ -203,6 +214,7 @@ To use these collections:
   ```
 
 - **Get Transaction History**: `GET /api/wallet/transactions`
+
   - Query Parameters:
     - `page`: Page number (default: 1)
     - `limit`: Items per page (default: 10)
