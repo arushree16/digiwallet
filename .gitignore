@@ -5,6 +5,13 @@
 .env.test.local
 .env.production.local
 
+# Firebase service account keys and secrets
+firebase-service-account.json
+firebase-service-account.json.json
+*.firebase-service-account.json
+serviceAccountKey.json
+*.serviceAccountKey.json
+
 # Logs
 logs
 *.log
